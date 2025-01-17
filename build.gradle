@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+// Basic project information
+group 'com.calculator'
+version '1.0-SNAPSHOT'
+
+// Configure Java version
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+// Repository configuration
+repositories {
+    mavenCentral()
+}
+
+// Main class configuration
+mainClassName = 'Calculator'
+
+// Configure Java source directory
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+}
