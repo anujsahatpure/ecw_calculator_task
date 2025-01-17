@@ -11,6 +11,7 @@ public class Calculator {
         System.out.println("2. Subtraction (-)");
         System.out.println("3. Multiplication (*)");
         System.out.println("4. Division (/)");
+        System.out.println("----------------");
         
         try {
             // Get first number
@@ -44,7 +45,7 @@ public class Calculator {
                         System.out.printf("%.2f / %.2f = %.2f%n", 
                             num1, num2, (num1 / num2));
                     } else {
-                        System.out.println("Error: Cannot divide by zero!");
+                        System.out.println("Error: Cannot divide by zero! Try using any non-zero value");
                     }
                     break;
                 default:
