@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.sonarqube' version '4.0.0.2929' // Apply SonarQube plugin
 }
 
 // Basic project information
@@ -25,5 +26,16 @@ sourceSets {
         java {
             srcDirs = ['src/main/java']
         }
+    }
+}
+
+// SonarQube configuration
+sonarqube {
+    properties {
+        property 'sonar.projectKey', 'Java-Calculator-Task' // Your project key
+        property 'sonar.host.url', 'http://localhost:9000' // Local SonarQube server URL
+        property 'sonar.token', "sqa_c7f266ff467ca76064b8b21f38a0f88dd85c87f1"
+        property 'sonar.java.source', '21' // Set Java source version for SonarQube analysis
+        property 'sonar.java.target', '21' // Set Java target version for SonarQube analysis
     }
 }
