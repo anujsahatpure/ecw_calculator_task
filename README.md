@@ -24,7 +24,7 @@ Before running the project, ensure you have the following tools installed:
 To get started with the project, clone this repository to your local machine:
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/anujsahatpure/ecw_calculator_task.git
 cd calculator
 ```
 
