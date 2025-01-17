@@ -36,3 +36,6 @@ gradle-wrapper.properties
 
 # Temporary files
 *.tmp
+
+#vscode
+.vscode
