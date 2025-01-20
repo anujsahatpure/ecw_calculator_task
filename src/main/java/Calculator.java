@@ -1,61 +1,37 @@
-import java.util.Scanner;
-
 public class Calculator {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double num1, num2;
+        if (args.length != 3) {
+            System.out.println("Error: Please provide exactly 3 arguments: num1, num2, and operator.");
+            return;
+        }
+
+        double num1 = Double.parseDouble(args[0]);
+        double num2 = Double.parseDouble(args[1]);
+        String operator = args[2];  // This is the operator (+, -, *, /)
 
         System.out.println("Basic Calculator");
         System.out.println("----------------");
-        System.out.println("1. Addition (+)");
-        System.out.println("2. Subtraction (-)");
-        System.out.println("3. Multiplication (*)");
-        System.out.println("4. Division (/)");
-        System.out.println("----------------");
-        
-        try {
-            // Get first number
-            System.out.print("\nEnter first number: ");
-            num1 = scanner.nextDouble();
 
-            // Get operation choice
-            System.out.print("Enter operation number (1-4): ");
-            int choice = scanner.nextInt();
-
-            // Get second number
-            System.out.print("Enter second number: ");
-            num2 = scanner.nextDouble();
-
-            // Perform calculation based on choice
-            switch (choice) {
-                case 1:
-                    System.out.printf("%.2f + %.2f = %.2f%n", 
-                        num1, num2, (num1 + num2));
-                    break;
-                case 2:
-                    System.out.printf("%.2f - %.2f = %.2f%n", 
-                        num1, num2, (num1 - num2));
-                    break;
-                case 3:
-                    System.out.printf("%.2f * %.2f = %.2f%n", 
-                        num1, num2, (num1 * num2));
-                    break;
-                case 4:
-                    if (num2 != 0) {
-                        System.out.printf("%.2f / %.2f = %.2f%n", 
-                            num1, num2, (num1 / num2));
-                    } else {
-                        System.out.println("Error: Cannot divide by zero! Try using any non-zero value");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid operation choice!");
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error: Invalid input! Please enter valid numbers.");
+        // Perform calculation based on the operator
+        switch (operator) {
+            case "+":
+                System.out.printf("%.2f + %.2f = %.2f%n", num1, num2, (num1 + num2));
+                break;
+            case "-":
+                System.out.printf("%.2f - %.2f = %.2f%n", num1, num2, (num1 - num2));
+                break;
+            case "*":
+                System.out.printf("%.2f * %.2f = %.2f%n", num1, num2, (num1 * num2));
+                break;
+            case "/":
+                if (num2 != 0) {
+                    System.out.printf("%.2f / %.2f = %.2f%n", num1, num2, (num1 / num2));
+                } else {
+                    System.out.println("Error: Cannot divide by zero! Try using any non-zero value.");
+                }
+                break;
+            default:
+                System.out.println("Invalid operator! Use +, -, *, or /.");
         }
-
-        scanner.close();
     }
 }

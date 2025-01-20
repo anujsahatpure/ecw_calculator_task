@@ -4,23 +4,18 @@ plugins {
     id 'org.sonarqube' version '4.0.0.2929'
 }
 
-// Basic project information
 group 'com.calculator'
 version '1.0-SNAPSHOT'
 
-// Configure Java version
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-// Repository configuration
 repositories {
     mavenCentral()
 }
 
-// Main class configuration
 mainClassName = 'Calculator'
 
-// Configure Java source directory
 sourceSets {
     main {
         java {
@@ -29,12 +24,27 @@ sourceSets {
     }
 }
 
-// SonarQube configuration
 sonarqube {
     properties {
-        property 'sonar.projectKey', 'Java-Calculator-Task' 
-        property 'sonar.host.url', 'http://localhost:9000' 
-        property 'sonar.java.source', '17' 
-        property 'sonar.java.target', '17' 
+        property 'sonar.projectKey', 'Java-Calculator-Task'
+        property 'sonar.host.url', 'http://localhost:9000'
+        property 'sonar.java.source', '17'
+        property 'sonar.java.target', '17'
     }
+}
+
+// Custom Gradle task to execute the Calculator program with arguments passed via command line
+task calculatorTask(type: JavaExec) {
+    description = 'Executes the Calculator program with arguments'
+    group = 'Calculator Tasks'
+
+    // Main class to run
+    main = 'Calculator'
+
+    // Dynamically pass arguments using project properties
+    args = [project.hasProperty('num1') ? project.num1 : '0', 
+            project.hasProperty('num2') ? project.num2 : '0', 
+            project.hasProperty('operator') ? project.operator : '+']
+
+    classpath = sourceSets.main.runtimeClasspath
 }
