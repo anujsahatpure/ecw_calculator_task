@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'jacoco'
     id 'org.sonarqube' version '4.0.0.2929'
 }
 
@@ -14,7 +15,11 @@ repositories {
     mavenCentral()
 }
 
-mainClassName = 'Calculator'
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
+
+mainClassName = 'com.calculator.Calculator'
 
 sourceSets {
     main {
@@ -24,12 +29,36 @@ sourceSets {
     }
 }
 
+jacoco {
+    toolVersion = '0.8.9'
+}
+
+test {
+    useJUnit()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
 sonarqube {
     properties {
         property 'sonar.projectKey', 'Java-Calculator-Task'
         property 'sonar.host.url', 'http://localhost:9000'
         property 'sonar.java.source', '17'
         property 'sonar.java.target', '17'
+        property 'sonar.sources', 'src/main/java'
+        property 'sonar.tests', 'src/test/java'
+        property 'sonar.java.binaries', 'build/classes/java/main'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+        property 'sonar.coverage.exclusions', '**/test/**'
+        property 'sonar.java.coveragePlugin', 'jacoco'
+        property 'sonar.token', 'sqp_2549a425fd2e47e9ed75687ed85f8e0a9c6095bf'
     }
 }
 
@@ -37,14 +66,13 @@ sonarqube {
 task calculatorTask(type: JavaExec) {
     description = 'Executes the Calculator program with arguments'
     group = 'Calculator Tasks'
-
-    // Main class to run
-    main = 'Calculator'
-
+    
+    main = 'com.calculator.Calculator'
+    
     // Dynamically pass arguments using project properties
     args = [project.hasProperty('num1') ? project.num1 : '0', 
             project.hasProperty('num2') ? project.num2 : '0', 
             project.hasProperty('operator') ? project.operator : '+']
-
+    
     classpath = sourceSets.main.runtimeClasspath
 }

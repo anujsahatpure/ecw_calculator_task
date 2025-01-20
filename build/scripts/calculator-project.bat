@@ -66,7 +66,7 @@ set CMD_LINE_ARGS=%*
 set CLASSPATH=%APP_HOME%\lib\calculator-project-1.0-SNAPSHOT.jar
 
 @rem Execute calculator-project
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %CALCULATOR_PROJECT_OPTS%  -classpath "%CLASSPATH%" Calculator %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %CALCULATOR_PROJECT_OPTS%  -classpath "%CLASSPATH%" com.calculator.Calculator %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell
