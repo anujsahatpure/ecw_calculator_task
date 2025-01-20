@@ -4,42 +4,94 @@ This is a simple calculator application built using Java and Gradle. It performs
 
 ## Features
 
-- **Addition (+)**
-- **Subtraction (-)**
-- **Multiplication (*)**
-- **Division (/)**
-- Handles input validation and division by zero error.
+- **Basic Arithmetic Operations**
+  - Addition (+)
+  - Subtraction (-)
+  - Multiplication (*)
+  - Division (/)
+- Input validation and error handling
+- JUnit test coverage
+- SonarQube integration for code quality analysis
+- Jenkins pipeline integration
 
 ## Prerequisites
 
 Before running the project, ensure you have the following tools installed:
 
-- **Java 21** or above (set in the `build.gradle` file).
-- **Gradle** (for building and running the project).
+- **Java 17** (as configured in `build.gradle`)
+- **Gradle** (for building and running the project)
+- **SonarQube** (for code quality analysis)
+- **Jenkins** (for CI/CD pipeline)
+
+## Project Structure
+
+```
+calculator-project/
+├── src/
+│   ├── main/java/com/calculator/
+│   │   └── Calculator.java
+│   └── test/java/com/calculator/
+│       └── CalculatorTest.java
+├── build.gradle
+├── Jenkinsfile
+└── README.md
+```
 
 ## Getting Started
 
 ### 1. Clone the Repository
 
-To get started with the project, clone this repository to your local machine:
-
 ```bash
 git clone https://github.com/anujsahatpure/ecw_calculator_task.git
-cd calculator
+cd calculator-project
 ```
 
-### 2.  Build the Project
-
-To build the project:
+### 2. Build the Project
 
 ```bash
-gradle build
+gradle clean build
 ```
 
-### 3.  Run the Project
-
-To run the project:
+### 3. Run Tests
 
 ```bash
-gradle run
+gradle test
 ```
+
+### 4. Generate Code Coverage Report
+
+```bash
+gradle jacocoTestReport
+```
+
+The coverage report will be available at: `build/reports/jacoco/test/html/index.html`
+
+### 5. Run SonarQube Analysis
+
+```bash
+gradle sonarqube \
+    -Dsonar.projectKey=Java-Calculator-Task \
+    -Dsonar.token=your_sonar_token
+```
+
+### 6. Run the Calculator
+
+You can run the calculator using the custom Gradle task with arguments:
+
+```bash
+gradle calculatorTask -Pnum1=10 -Pnum2=5 -Poperator=+
+```
+
+Replace the values for:
+- `num1`: First number
+- `num2`: Second number
+- `operator`: One of +, -, *, /
+
+## Jenkins Pipeline
+
+The project includes a Jenkins pipeline configuration (`Jenkinsfile`) that:
+1. Builds the project
+2. Runs tests
+3. Performs SonarQube analysis
+4. Archives build artifacts
+5. Runs a sample calculator operation
